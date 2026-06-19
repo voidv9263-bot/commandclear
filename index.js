@@ -2,12 +2,12 @@ require('dotenv').config();
 
 const { Client, GatewayIntentBits, REST, Routes } = require('discord.js');
 
+const TOKEN = process.env.TOKEN;
+const CLIENT_ID = process.env.CLIENT_ID;
+
 const client = new Client({
     intents: [GatewayIntentBits.Guilds]
 });
-
-const TOKEN = process.env.TOKEN;
-const CLIENT_ID = process.env.CLIENT_ID;
 
 client.once('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`);
@@ -22,12 +22,12 @@ client.once('ready', async () => {
             { body: [] }
         );
 
-        console.log('✅ All global slash commands have been deleted.');
-    } catch (error) {
-        console.error('❌ Failed to clear commands:', error);
+        console.log('Successfully cleared all global slash commands.');
+    } catch (err) {
+        console.error(err);
     }
 
-    process.exit(0); // Stops the bot after clearing commands
+    process.exit(0);
 });
 
 client.login(TOKEN);
